@@ -54,7 +54,7 @@ def loadCIFAR10(data_dir):
 	cifar_train_filenames = []
 	cifar_train_labels = []
 
-	for x in xrange(1,6):
+	for x in xrange(1,2):
 		cifar_train_data_dict = unpickle(data_dir + "/data_batch_{}".format(x))
 		if x == 1:
 			cifar_train_data = cifar_train_data_dict[b'data']

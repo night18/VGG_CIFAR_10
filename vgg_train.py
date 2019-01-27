@@ -74,10 +74,10 @@ def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate =
 	if model != None:
 		pprint("Start training model: " + model_name)
 		model.compile(loss = tf.keras.losses.categorical_crossentropy,
-						optimizer=SGD(lr=0.01),
+						optimizer=SGD(lr=learning_rate),
 						metrics=['accuracy'])
 
-		model.fit(train_data, train_labels, epochs = epochs, batch_size = 100 )
+		model.fit(train_data, train_labels, epochs = epochs, batch_size = 1 )
 
 		tf.keras.models.save_model(
 			model,
