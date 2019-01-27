@@ -10,7 +10,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPool2D, Activation
 from tensorflow.keras.optimizers import SGD
 from pprint import pprint
-
+import os
 import numpy as np
 # import util
 
@@ -33,21 +33,24 @@ def vgg_11():
 
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
-	model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
+	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	# model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
-	model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
+	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	# model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
-	model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
+	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	# model.add( MaxPool2D(pool_size=(3, 3), strides = 1 ) )
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -77,7 +80,7 @@ def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate =
 						optimizer=SGD(lr=learning_rate),
 						metrics=['accuracy'])
 
-		model.fit(train_data, train_labels, epochs = epochs, batch_size = 1 )
+		hist = model.fit(train_data, train_labels, epochs = epochs, batch_size = 50 )
 
 		tf.keras.models.save_model(
 			model,
@@ -90,13 +93,18 @@ def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate =
 	return model
 
 def loadModel(model_name, learning_rate = 0.01):
-	model = None
 	storage_path = models_dir + "/" + model_name + "_" + str(learning_rate) + ".h5"
 	try:
+		pprint(storage_path)
 		model = tf.keras.models.load_model(
 			storage_path,
-			custom_objects=None,
-	    	compile=True
+			compile = False
 		)
-	finally:	
+		model.compile(loss = tf.keras.losses.categorical_crossentropy,
+						optimizer=SGD(lr=learning_rate),
+						metrics=['accuracy'])
+	except Exception as e:
+		model = None
+		pprint(e)
+	finally:
 		return model

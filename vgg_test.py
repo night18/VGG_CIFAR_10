@@ -13,10 +13,10 @@ cifar_10_dir = "cifar-10"
 
 def testModel(model, model_name, x_test, y_test):
 	score = model.evaluate(x_test, y_test)
-	pprint("=============================================\n")
+	pprint("=============================================")
 	pprint("Test perforemance of model " + model_name)
-	pprint('Test loss:'+ score[0])
-	pprint('Test accuracy:'+ score[1])
+	pprint('Test loss:'+ str(score[0]))
+	pprint('Test accuracy:'+ str(score[1]))
 
 
 if __name__ == '__main__':
