@@ -24,8 +24,12 @@ if __name__ == '__main__':
 	#load data set 
 	train_data, _, train_labels, test_data, _, test_labels, label_names = util.loadCIFAR10(cifar_10_dir)
 
+	train_data = train_data[0:1000]
+	train_labels = train_data[0:1000]
 	test_data =  test_data[0:1000]
 	test_labels = test_labels[0:1000]
+
+	train_data, test_data = train_data/255.0, test_data/255.0
 
 	vgg_11_model = vgg_train.loadModel("vgg_11")
 	
@@ -33,3 +37,5 @@ if __name__ == '__main__':
 		vgg_11_model = vgg_train.trainModel("vgg_11", train_data, train_labels, epochs = 1)
 
 	testModel(vgg_11_model, "vgg_11", test_data, test_labels )
+
+	

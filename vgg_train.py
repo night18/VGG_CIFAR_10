@@ -69,7 +69,7 @@ def vgg_11():
 
 def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate = 0.01):
 	model = None
-	storage_path = models_dir + "/" + model_name + "_" + str(learning_rate) + ".h5"
+	storage_path = model_name + "_" + str(learning_rate) + ".h5"
 
 	if model_name == "vgg_11":
 		model = vgg_11()
@@ -93,7 +93,7 @@ def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate =
 	return model
 
 def loadModel(model_name, learning_rate = 0.01):
-	storage_path = models_dir + "/" + model_name + "_" + str(learning_rate) + ".h5"
+	storage_path = model_name + "_" + str(learning_rate) + ".h5"
 	try:
 		pprint(storage_path)
 		model = tf.keras.models.load_model(
