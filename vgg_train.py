@@ -39,8 +39,8 @@ def vgg_11():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -50,8 +50,8 @@ def vgg_11():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -61,12 +61,12 @@ def vgg_11():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
-	model.add(BatchNormalization())
 	model.add( Activation('relu') )
+	model.add(BatchNormalization())
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -97,8 +97,8 @@ def vgg_11_02():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -108,12 +108,13 @@ def vgg_11_02():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
-	model.add(BatchNormalization())
 	model.add( Activation('relu') )
+	model.add(BatchNormalization())
+	
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -144,8 +145,8 @@ def vgg_11_03():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -155,8 +156,8 @@ def vgg_11_03():
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
 	model.add(Dropout(0.4))
-	model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
-	# model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
+	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
+	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add(BatchNormalization())

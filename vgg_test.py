@@ -8,7 +8,7 @@ import vgg_train
 import matplotlib.pyplot as plt
 
 cifar_10_dir = "cifar-10"
-epochs = 50
+epochs = 15
 validation_number = 5000
 train_number = 50000 - validation_number
 
@@ -20,19 +20,23 @@ def testModel(model, model_name, x_test, y_test):
 	print('Test accuracy:'+ str(score[1]))
 
 
-def plot_performance(histories, name_list, isloss = True):
+def plot_performance(histories, name_list, isloss = True, isVal = False):
 	#isloss means whether plot loss. If True, plot loss, nor plot accuracy
 
 	perforemance = 'loss' if isloss else 'acc'
+	val = 'val_' if isVal else ''
+
+	perforemance = val + perforemance
+	# print(perforemance)
 
 	for hist in histories:
 		plt.plot(hist[perforemance])
-	plt.xticks(np.arange(0, epochs, 1.0))
+	plt.xticks(np.arange(0, epochs +1 , epochs/5 ))
 	plt.ylabel(perforemance)
 	plt.xlabel( "epochs" )
 	plt.legend( name_list , loc=0)
-	# plt.show()
-	plt.savefig("model.png")
+	plt.show()
+	plt.savefig( perforemance + ".png" )
 
 
 
@@ -66,7 +70,7 @@ if __name__ == '__main__':
 		path = "history/{}_0.01".format(x)
 		histories.append( util.unpickle(path) )
 
-	plot_performance(histories, model_list, isloss = False)
+	plot_performance(histories, model_list, isloss = True, isVal=True)
 	
 	# for x in learning_rate_list:
 	# 	model = vgg_train.loadModel("vgg_11", x)
