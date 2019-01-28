@@ -6,17 +6,20 @@ Description: Train VGG-like network
 =======================================================================================
 '''
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, save_model, load_model
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPool2D, Activation
 from tensorflow.keras.optimizers import SGD
-from pprint import pprint
+
 import os
 import numpy as np
+import pickle
+
 # import util
 
 
 # cifar_10_dir = "cifar-10"
 models_dir = "models"
+history_dir = "history"
 # train_data, train_filenames, train_labels, test_data, test_filenames, test_labels, label_names = util.loadCIFAR10(cifar_10_dir)
 
 def vgg_11():
@@ -28,7 +31,7 @@ def vgg_11():
 	
 	model = Sequential()
 	
-	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
+	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same', input_shape=(32,32,3) ) )
 	model.add( Activation('relu') )
 
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
@@ -67,44 +70,57 @@ def vgg_11():
 
 	return model
 
-def trainModel(model_name, train_data, train_labels, epochs = 5, learning_rate = 0.01):
+def trainModel(model_name, train_data, train_labels, validation_data, validation_labels, epochs = 5, learning_rate = 0.01):
 	model = None
-	storage_path = model_name + "_" + str(learning_rate) + ".h5"
-
+	h5_storage_path = models_dir + "/" + model_name + "_" + str(learning_rate) + ".h5"
+	hist_storage_path = history_dir + "/" + model_name + "_" + str(learning_rate)
+	
 	if model_name == "vgg_11":
 		model = vgg_11()
 
 	if model != None:
-		pprint("Start training model: " + model_name)
+		print("Start training model: " + model_name)
 		model.compile(loss = tf.keras.losses.categorical_crossentropy,
-						optimizer=SGD(lr=learning_rate),
-						metrics=['accuracy'])
+						optimizer = SGD(lr = learning_rate),
+						metrics = ['accuracy'])
 
-		hist = model.fit(train_data, train_labels, epochs = epochs, batch_size = 50 )
-
-		tf.keras.models.save_model(
-			model,
-			storage_path,
-			overwrite = True,
-			include_optimizer=True
+		hist = model.fit(
+				train_data, 
+				train_labels, 
+				epochs = epochs,
+				batch_size = 50,
+				validation_data=(validation_data, validation_labels)
 			)
+		
+		#Save model and weight
+		save_model(
+			model,
+			h5_storage_path,
+			# '/home/chunwei/Documents/class/CPE691/HW1/model.h5',
+			overwrite=True,
+			include_optimizer=True
+		)
 
-		pprint("Successfully save the model at " + storage_path)
+		#Save the history of training
+		with open(hist_storage_path, 'wb') as file_hist:
+			pickle.dump(hist.history, file_hist)
+
+		print("Successfully save the model at " + h5_storage_path)
 	return model
 
 def loadModel(model_name, learning_rate = 0.01):
-	storage_path = model_name + "_" + str(learning_rate) + ".h5"
+	h5_storage_path = models_dir + "/" + model_name + "_" + str(learning_rate) + ".h5"
+	
 	try:
-		pprint(storage_path)
-		model = tf.keras.models.load_model(
-			storage_path,
-			compile = False
+		model = load_model(
+		    h5_storage_path,
+		    # '/home/chunwei/Documents/class/CPE691/HW1/model.h5',
+		    custom_objects=None,
+		    compile=True
 		)
-		model.compile(loss = tf.keras.losses.categorical_crossentropy,
-						optimizer=SGD(lr=learning_rate),
-						metrics=['accuracy'])
+
 	except Exception as e:
 		model = None
-		pprint(e)
+		print(e)
 	finally:
 		return model

@@ -8,8 +8,7 @@ Description: Load CIFAR-10 Dataset and print the images.
 
 import numpy as np
 import matplotlib.pyplot as plt
-import cPickle
-from pprint import pprint
+import pickle
 
 
 def unpickle(file):
@@ -18,8 +17,9 @@ def unpickle(file):
 	here is the source of CIFAR-10 datasets: https://www.cs.toronto.edu/~kriz/cifar.html
 	'''
 	with open(file, 'rb') as fo:
-		dict = cPickle.load(fo)
+		dict = pickle.load(fo, encoding='bytes')
 	return dict
+
 
 
 
@@ -54,7 +54,7 @@ def loadCIFAR10(data_dir):
 	cifar_train_filenames = []
 	cifar_train_labels = []
 
-	for x in xrange(1,2):
+	for x in range(1,6):
 		cifar_train_data_dict = unpickle(data_dir + "/data_batch_{}".format(x))
 		if x == 1:
 			cifar_train_data = cifar_train_data_dict[b'data']
