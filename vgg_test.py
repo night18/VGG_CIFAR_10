@@ -8,7 +8,7 @@ import vgg_train
 import matplotlib.pyplot as plt
 
 cifar_10_dir = "cifar-10"
-epochs = 13
+epochs = 50
 validation_number = 5000
 train_number = 50000 - validation_number
 
@@ -32,7 +32,7 @@ def plot_performance(histories, name_list, isloss = True):
 	plt.xlabel( "epochs" )
 	plt.legend( name_list , loc=0)
 	# plt.show()
-	plt.savefig("learning_rate.png")
+	plt.savefig("model.png")
 
 
 
