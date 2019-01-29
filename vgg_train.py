@@ -38,7 +38,6 @@ def vgg_11():
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
@@ -49,7 +48,6 @@ def vgg_11():
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
@@ -60,7 +58,6 @@ def vgg_11():
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
@@ -70,6 +67,7 @@ def vgg_11():
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
+	model.add(BatchNormalization())
 
 	model.add( Flatten() )
 	model.add( Dense(200, activation='relu') )
@@ -90,31 +88,31 @@ def vgg_11_02():
 	model = Sequential()
 	
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same', input_shape=(32,32,3) ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
+	model.add( Activation('relu') )
 
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
+	model.add( Activation('relu') )
+	# model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
+	model.add( Activation('relu') )
 
 	model.add( Conv2D(128, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
+	model.add( Activation('relu') )
+	# model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	
+
 
 	model.add( Conv2D(512, kernel_size = (3,3), padding = 'same' ) )
 	model.add( Activation('relu') )
@@ -138,24 +136,24 @@ def vgg_11_03():
 	model = Sequential()
 	
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same', input_shape=(32,32,3) ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
+	model.add( Activation('relu') )
 
 	model.add( Conv2D(64, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
+	model.add( Activation('relu') )
+	# model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
+	model.add( Activation('relu') )
 
 	model.add( Conv2D(256, kernel_size = (3,3), padding = 'same' ) )
-	model.add( Activation('relu') )
 	model.add(BatchNormalization())
-	model.add(Dropout(0.4))
+	model.add( Activation('relu') )
+	# model.add(Dropout(0.4))
 	# model.add( MaxPool2D(pool_size=(2,2),strides=(2,2)) )
 	model.add( MaxPool2D(pool_size=(3, 3), strides = (1,1) ) )
 
@@ -198,7 +196,7 @@ def trainModel(model_name, train_data, train_labels, validation_data, validation
 				train_data, 
 				train_labels, 
 				epochs = epochs,
-				batch_size = 50,
+				batch_size = 13,
 				validation_data=(validation_data, validation_labels)
 			)
 		
